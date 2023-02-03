@@ -1,0 +1,20 @@
+{
+  "name": "bookshelf-api-dicoding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usmanlubis/bookshelf-api-dicoding.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/usmanlubis/bookshelf-api-dicoding/issues"
+  },
+  "homepage": "https://github.com/usmanlubis/bookshelf-api-dicoding#readme"
+}
