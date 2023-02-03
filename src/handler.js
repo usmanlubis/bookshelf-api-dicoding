@@ -76,7 +76,30 @@ const showAllBooksHandler = () => ({
   },
 });
 
+const getBooksByIdHandler = (request, h) => {
+  const { id } = request.params;
+  const book = books.filter((b) => b.id === id)[0];
+
+  if (book !== undefined) {
+    return {
+      status: 'Success',
+      data: {
+        book,
+      },
+    };
+  }
+
+  const response = h.response({
+    status: 'Fail',
+    message: 'Book not found',
+  });
+  response.code(404);
+
+  return response;
+};
+
 module.exports = {
   addBooksHandler,
   showAllBooksHandler,
+  getBooksByIdHandler,
 };
