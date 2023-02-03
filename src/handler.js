@@ -161,9 +161,34 @@ const editBooksByIdHandler = (request, h) => {
   return response;
 };
 
+const deleteBooksByIdHandler = (request, h) => {
+  const { id } = request.params;
+  const index = books.findIndex((book) => book.id === id);
+
+  if (index !== -1) {
+    books.splice(index, 1);
+    const response = h.response({
+      status: 'Success',
+      message: 'Book has been deleted',
+    });
+    response.code(200);
+
+    return response;
+  }
+
+  const response = h.response({
+    status: 'Fail',
+    messag: 'Failed to delete The Book',
+  });
+  response.code(404);
+
+  return response;
+};
+
 module.exports = {
   addBooksHandler,
   showAllBooksHandler,
   getBooksByIdHandler,
   editBooksByIdHandler,
+  deleteBooksByIdHandler,
 };
