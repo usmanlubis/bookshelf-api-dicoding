@@ -98,8 +98,72 @@ const getBooksByIdHandler = (request, h) => {
   return response;
 };
 
+const editBooksByIdHandler = (request, h) => {
+  const { name, year, author, summary, publisher, pageCount, pageRead, reading } = request.payload;
+  const { id } = request.params;
+
+  const index = books.findIndex((book) => book.id === id);
+
+  const finished = pageRead === pageCount;
+  const updatedAt = new Date().toISOString();
+
+  if (index !== -1) {
+    if (name === undefined) {
+      const response = h.response({
+        status: 'Fail',
+        message: 'Please enter the name!',
+      });
+      response.code(400);
+
+      return response;
+    }
+
+    if (pageRead > pageCount) {
+      const response = h.response({
+        status: 'Fail',
+        message: 'pageRead should not be higher than pageCount',
+      });
+      response.code(400);
+
+      return response;
+    }
+
+    books[index] = {
+      ...books[index],
+      id,
+      name,
+      year,
+      author,
+      summary,
+      publisher,
+      pageCount,
+      pageRead,
+      finished,
+      reading,
+      updatedAt,
+    };
+
+    const response = h.response({
+      status: 'Success',
+      message: 'Book data has been updated',
+    });
+    response.code(200);
+
+    return response;
+  }
+
+  const response = h.response({
+    status: 'Fail',
+    message: 'Book not found',
+  });
+  response.code(404);
+
+  return response;
+};
+
 module.exports = {
   addBooksHandler,
   showAllBooksHandler,
   getBooksByIdHandler,
+  editBooksByIdHandler,
 };
