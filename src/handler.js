@@ -70,6 +70,13 @@ const addBooksHandler = (request, h) => {
   return response;
 };
 
+const showAllBooksHandler = () => ({
+  data: {
+    books,
+  },
+});
+
 module.exports = {
   addBooksHandler,
+  showAllBooksHandler,
 };
